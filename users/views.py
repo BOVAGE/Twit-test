@@ -2,6 +2,7 @@ from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
+from rest_framework.parsers import FormParser, MultiPartParser
 from .permissions import IsOwnerOrReadOnly
 from .serializers import (
     LoginSerializer,RegisterSerializer, UserSerializer
@@ -123,6 +124,7 @@ class FollowingView(APIView):
 class ProfileView(generics.GenericAPIView):
     serializer_class = UserSerializer
     permission_classes = [IsOwnerOrReadOnly]
+    parser_classes = [FormParser, MultiPartParser]
 
     def get_user(self, id):
         return get_object_or_404(User, id=id)

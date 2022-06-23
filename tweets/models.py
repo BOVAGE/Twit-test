@@ -6,7 +6,7 @@ User = get_user_model()
 class Tweet(models.Model):
     creator = models.ForeignKey(User, related_name='tweets', on_delete=models.CASCADE)
     text = models.CharField(max_length=256)
-    image = models.ImageField(upload_to="post_images/", blank=True)
+    image = models.ImageField(upload_to="tweet_images/", blank=True)
     date_created = models.DateTimeField(auto_now_add=True, db_index=True)
 
     class Meta:

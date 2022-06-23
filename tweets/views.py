@@ -1,6 +1,7 @@
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
+from rest_framework.parsers import FormParser, MultiPartParser
 from .permissions import IsOwnerOrReadOnly
 from .serializers import TweetSerializer
 from .models import Tweet
@@ -10,6 +11,7 @@ class TweetListCreateView(generics.ListCreateAPIView):
     serializer_class = TweetSerializer
     queryset = Tweet.objects.all().select_related('creator')
     permission_classes = [IsAuthenticatedOrReadOnly]
+    parser_classes = [FormParser, MultiPartParser]
 
     def perform_create(self, serializer):
         serializer.save(creator=self.request.user)
