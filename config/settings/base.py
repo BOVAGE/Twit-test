@@ -35,6 +35,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     #created apps
     'users',
+    'tweets',
 
     #third-party packages
     'rest_framework',
