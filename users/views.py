@@ -1,5 +1,6 @@
 from rest_framework.response import Response
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
 from .permissions import IsOwnerOrReadOnly
 from .serializers import (
@@ -44,7 +45,8 @@ class RegisterView(NoAuthenticationMixin, generics.GenericAPIView):
 
 
 class FollowerView(APIView):
-    
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
     def get_user(self, id):
         return get_object_or_404(User, id=id)
 
@@ -52,7 +54,7 @@ class FollowerView(APIView):
         """
         get the no of followers of the user with the id
         """
-        followers_no = len(self.get_user(id).followers.all())
+        followers_no = self.get_user(id).followers.count()
         # print(self.get_user(id))
         data = {
             'status': 'success',
@@ -67,6 +69,13 @@ class FollowerView(APIView):
             handles the authenticated user following the user with that id
         """
         user_to_follow = self.get_user(id)
+        if user_to_follow == request.user:
+            data = {
+            'status': 'fail',
+            'data': [],
+            'message': f'You cannot follow yourself'
+        }
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
         user_to_follow.followers.add(request.user)
         data = {
             'status': 'success',
@@ -101,7 +110,8 @@ class FollowingView(APIView):
         """
         get the no of following  of the user with the id
         """
-        following_no = len(self.get_user(id).following.all())
+        following_no = self.get_user(id).following.count()
+        #count() is more efficient than len() in this case
         data = {
             'status': 'success',
             'data': {
