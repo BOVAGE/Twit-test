@@ -12,9 +12,6 @@ media
 # Docker files # 
 data/
 
-# pip files # 
-Pipfile
-Pipfile.lock
 
 # If you are using PyCharm # 
 # User-specific stuff

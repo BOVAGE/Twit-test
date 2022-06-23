@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "==4.0"
+pillow = "*"
+python-decouple = "*"
+djangorestframework = "*"
+djangorestframework-simplejwt = "*"
+psycopg2-binary = "*"
+django-redis = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
