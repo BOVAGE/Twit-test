@@ -12,6 +12,9 @@ djangorestframework-simplejwt = "*"
 psycopg2-binary = "*"
 django-redis = "*"
 drf-yasg = "*"
+django-cloudinary-storage = "*"
+gunicorn = "*"
+dj-database-url = "*"
 
 [dev-packages]
 
