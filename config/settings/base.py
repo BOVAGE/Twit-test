@@ -151,6 +151,7 @@ REST_FRAMEWORK = {
     'NON_FIELD_ERRORS_KEY': "error"
 }
 
+#SIMPLE_JWT CONFIGURATION
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
@@ -159,3 +160,17 @@ SIMPLE_JWT = {
     'ALGORITHM': config('JWT_ALGORITHM'),
     'SIGNING_KEY': config('JWT_SECRET_KEY'),
 }
+
+#CACHE CONFIGURATION
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": config('REDIS_URL'),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient"
+        },
+        "KEY_PREFIX": "twit"
+    }
+}
+
+CACHE_TTL = 60 * 15 #15 minutes timeout for caching

@@ -11,8 +11,11 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from .mixins import NoAuthenticationMixin
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.conf import settings
 
-
+CACHE_TTL = settings.CACHE_TTL
 User = get_user_model()
 
 class LoginView(NoAuthenticationMixin,generics.GenericAPIView):
@@ -129,6 +132,7 @@ class ProfileView(generics.GenericAPIView):
     def get_user(self, id):
         return get_object_or_404(User, id=id)
     
+    @method_decorator(cache_page(CACHE_TTL))
     def get(self, request, id):
         user = self.get_user(id)
         serializer = UserSerializer(user)
