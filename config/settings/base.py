@@ -148,7 +148,8 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
-    'NON_FIELD_ERRORS_KEY': "error"
+    'NON_FIELD_ERRORS_KEY': "error",
+    'EXCEPTION_HANDLER': 'common.exceptions.custom_exception_handler'
 }
 
 #SIMPLE_JWT CONFIGURATION
