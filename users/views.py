@@ -45,7 +45,7 @@ class RegisterView(NoAuthenticationMixin, generics.GenericAPIView):
             "message": "User created successfully",
             "data": serializer.data
         }
-        return Response(data, status=status.HTTP_200_OK)
+        return Response(data, status=status.HTTP_201_CREATED)
 
 
 class FollowerView(APIView):
