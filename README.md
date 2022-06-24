@@ -11,6 +11,22 @@ The documentation for this API can be accessed [here](https://documenter.getpost
 - Redis
 - Docker
 
+## Development
+
+To run locally, type
+```
+docker-compose up --build
+```
+Ensure you include the env var in the .env.sample file.
+
+*Keys prefixed with CLOUDINARY can be omitted.*
+
+## Testing
+To run tests, open a new console in the root directory and type
+```
+docker-compose exec web python manage.py test
+```
+
 ## Deployment
 The API was deployed on Heroku using Docker by building the Docker image using heroku.yml file
 
