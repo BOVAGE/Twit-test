@@ -39,6 +39,7 @@ INSTALLED_APPS = [
 
     #third-party packages
     'rest_framework',
+    'drf_yasg',
 
     #default apps
     'django.contrib.admin',
@@ -175,3 +176,15 @@ CACHES = {
 }
 
 CACHE_TTL = 60 * 15 #15 minutes timeout for caching
+
+#SWAGGER_SETTINGS 
+SWAGGER_SETTINGS = {
+    'USE_SESSION_AUTH': False,
+    'SECURITY_DEFINITIONS': {
+        "Auth Token eg [Bearer (JWT)]": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}
