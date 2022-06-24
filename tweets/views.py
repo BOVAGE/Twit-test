@@ -1,4 +1,5 @@
 from rest_framework import generics
+from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.parsers import FormParser, MultiPartParser
@@ -11,6 +12,11 @@ from django.views.decorators.vary import vary_on_headers
 from django.conf import settings
 
 CACHE_TTL = settings.CACHE_TTL
+
+class ApiRootView(APIView):
+
+    def get(self, request):
+        return Response({"twit-fleet": "tweeter-fleet"})
 
 class TweetListCreateView(generics.ListCreateAPIView):
     serializer_class = TweetSerializer
@@ -58,7 +64,7 @@ class MyNewsFeedListView(generics.ListAPIView):
     def get(self, *args, **kwargs):
         return super().get(*args, **kwargs)
 
-
+ApiRootView = ApiRootView.as_view() 
 TweetListCreateView = TweetListCreateView.as_view()
 TweetRetrieveDeleteView = TweetRetrieveDeleteView.as_view()
 MyTweetListView = MyTweetListView.as_view()
