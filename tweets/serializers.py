@@ -4,9 +4,9 @@ from django.contrib.auth import get_user_model, authenticate
 
 User = get_user_model()
 class TweetSerializer(serializers.HyperlinkedModelSerializer):
-    creator = serializers.ReadOnlyField(source='creator.username')
+    creator = serializers.HyperlinkedRelatedField(read_only=True, view_name='users:profile', lookup_url_kwarg='id')
     url = serializers.HyperlinkedIdentityField(view_name='tweets:tweet-detail', lookup_url_kwarg='id')
-    creator_profile = serializers.HyperlinkedIdentityField(view_name='users:profile', lookup_url_kwarg='id')
+    creator_name = serializers.CharField(source='creator.username', read_only=True)
     class Meta:
         model = Tweet
-        fields = ['id', 'url', 'creator', 'creator_profile', 'text', 'image', 'date_created']
+        fields = ['id', 'url', 'creator', 'creator_name', 'text', 'image', 'date_created']
