@@ -10,3 +10,5 @@ COPY Pipfile Pipfile.lock /app/
 RUN pip install pipenv && pipenv install --system
 
 COPY . /app/
+
+RUN python manage.py collectstatic --noinput
