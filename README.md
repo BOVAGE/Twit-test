@@ -32,5 +32,5 @@ The API was deployed on Heroku using Docker by building the Docker image using h
 
 **Link:** https://twit-fleet.herokuapp.com
 
-**NB:** I didn't configure Docker to serve static files hence the reason for the ugly look of the pages in web browser.
-😐
+~~**NB:** I didn't configure Docker to serve static files hence the reason for the ugly look of the pages in web browser.
+😐~~ See [issue #1](https://github.com/BOVAGE/Twit-test/issues/1)
